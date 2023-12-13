@@ -1,0 +1,82 @@
+/dts-v1/;
+#include <nordic/nrf52805_caaa.dtsi>
+
+/ {
+  model = "Patchwork Devboard";
+  compatible = "kounolab,patchwork-devboard";
+
+  chosen {
+    zephyr,console = &uart0;
+    zephyr,shell-uart = &uart0;
+    zephyr,uart-mcumgr = &uart0;
+    zephyr,bt-mon-uart = &uart0;
+    zephyr,bt-c2h-uart = &uart0;
+    zephyr,sram = &sram0;
+    zephyr,flash = &flash0;
+    zephyr,code-partition = &slot0_partition;
+  };
+
+  leds {
+    compatible = "gpio-leds";
+
+    led_green: green_led {
+      gpios = <&gpio0 0 GPIO_ACTIVE_LOW>;
+      label = "GREEN LED";
+    };
+
+    led_red: red_led {
+      gpios = <&gpio0 1 GPIO_ACTIVE_LOW>;
+      label ="RED LED";
+    };
+
+    led_blue: blue_red {
+      gpios = <&gpio0 4 GPIO_ACTIVE_LOW>;
+      label = "BLUE LED";
+    };
+  };
+
+  buttons {
+    compatible = "gpio-keys";
+
+    user_button: button {
+      gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;
+      label = "USER BUTTON";
+    };
+  };
+
+  aliases {
+    led-red = &led_red;
+    led-green = &led_green;
+    led-blue = &led_blue;
+    button = &user_button;
+  };
+};
+
+&flash0 {
+  partitions {
+    compatible = "fixed-partitions";
+    #address-cells = <1>;
+    #size-cells = <1>;
+
+    boot_partition: partition@0 {
+      label = "mcuboot";
+      reg = <0x00000000 0xc000>;
+    };
+    slot0_partition: partition@c000 {
+      label = "image-0";
+      reg = <0x0000C000 0xd000>;
+    };
+    slot1_partition: partition@19000 {
+      label = "image-1";
+      reg = <0x00019000 0xd000>;
+    };
+    scratch_partition: partition@26000 {
+      label = "image-scratch";
+      reg = <0x00026000 0x3000>;
+    };
+    storage_partition: partition@29000 {
+      label = "storage";
+      reg = <0x00029000 0x00007000>;
+    };
+  };
+};

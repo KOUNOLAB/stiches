@@ -1,0 +1,7 @@
+config LSM6DSV
+  bool "LSM6DSV 6 axis IMU"
+	default y
+  depends on DT_HAS_ST_LSM6DSV_ENABLED
+	depends on GPIO
+	help
+    Enable driver for the LSM6DSV 6 axis IMU

@@ -1,0 +1,33 @@
+{
+    "build": {
+        "extra_flags": "-DPATCHWORK_DEVBOARD",
+        "f_cpu": "64000000L",
+        "cpu": "cortex-m4",
+        "mcu": "nrf52805",
+        "zephyr": {
+            "variant": "patchwork_devboard"
+        }
+    },
+    "frameworks": [
+        "zephyr"
+    ],
+    "platforms": [
+        "nordicnrf52"
+    ],
+    "upload": {
+        "maximum_ram_size": 24576,
+        "maximum_size": 196608,
+        "protocol": "stlink",
+        "protocols": [
+            "stlink"
+        ]
+    },
+    "debug": {
+        "default_tools": [
+            "stlink"
+        ]
+    },
+    "name": "Patchwork Devboard",
+    "url": "https://kouno.xyz",
+    "vendor": "KounoLab"
+}

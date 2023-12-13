@@ -1,0 +1,9 @@
+if BOARD_PATCHWORK_DEVBOARD
+
+config BOARD
+    default "Patchwork Devboard"
+
+config BT_CTLR
+    default BT
+
+endif

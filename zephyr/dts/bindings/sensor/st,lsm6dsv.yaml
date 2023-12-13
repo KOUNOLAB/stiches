@@ -1,0 +1,6 @@
+descriptions: |
+  LSM6DSV Sensor
+
+compatible: "st,lsm6dsv"
+
+include: base.yaml
