@@ -5,6 +5,11 @@
 extern "C" {
 #endif
 
+#include "./lsm6dsv_reg.h"
+
+#include <device.h>
+#include <drivers/sensor.h>
+
 #ifdef __cplusplus
 }
 #endif

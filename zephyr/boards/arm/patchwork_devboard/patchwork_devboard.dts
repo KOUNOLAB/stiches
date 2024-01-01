@@ -52,6 +52,12 @@
   };
 };
 
+&i2c0 {
+  lsm6dsv: lsm6dsv@68 {
+    compatible = "st,lsm6dsv";
+  }
+}
+
 &flash0 {
   partitions {
     compatible = "fixed-partitions";

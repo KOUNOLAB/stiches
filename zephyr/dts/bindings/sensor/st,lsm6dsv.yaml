@@ -4,3 +4,5 @@ descriptions: |
 compatible: "st,lsm6dsv"
 
 include: base.yaml
+
+properties:
