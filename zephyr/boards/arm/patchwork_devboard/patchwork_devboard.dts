@@ -55,6 +55,11 @@
 &i2c0 {
   lsm6dsv: lsm6dsv@68 {
     compatible = "st,lsm6dsv";
+    reg = <0x68>;
+
+    irq-gpios = <&gpio0 12 GPIO_ACTIVE_HIGH>;
+    accel-bdr = <6>; // 120 Hz
+    temperature-odr = <1>; // 1.875 Hz
   }
 }
 

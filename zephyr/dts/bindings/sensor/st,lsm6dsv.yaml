@@ -3,6 +3,96 @@ descriptions: |
 
 compatible: "st,lsm6dsv"
 
-include: base.yaml
+include: sensor-device.yaml
 
 properties:
+  irq-gpios:
+    type: phandle-array
+    description: |
+      The optional INT1 and INT2 signal connections.
+    required: false
+  gyro-bdr:
+    type: int
+    default: 0
+    description: |
+      The gyroscope batch data rate expressed in samples per second (Hz).
+      Default is OFF.
+
+      - 0 # OFF
+      - 1 # 1.875 Hz
+      - 2 # 7.5 Hz
+      - 3 # 15 Hz
+      - 4 # 30 Hz
+      - 5 # 60 Hz
+      - 6 # 120 Hz
+      - 7 # 240 Hz
+      - 8 # 480 Hz
+      - 9 # 960 Hz
+      - 10 # 1.92 kHz
+      - 11 # 3.84 kHz
+      - 12 # 7.68 kHz
+    enum: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  accel-bdr:
+    type: int
+    default: 0
+    description: |
+      The accelerometer batch data rate expressed in samples per second (Hz).
+      Default is OFF.
+
+      - 0 # OFF
+      - 1 # 1.875 Hz
+      - 2 # 7.5 Hz
+      - 3 # 15 Hz
+      - 4 # 30 Hz
+      - 5 # 60 Hz
+      - 6 # 120 Hz
+      - 7 # 240 Hz
+      - 8 # 480 Hz
+      - 9 # 960 Hz
+      - 10 # 1.92 kHz
+      - 11 # 3.84 kHz
+      - 12 # 7.68 kHz
+    enum: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+  timestamp-decimation:
+    type: int
+    default: 0
+    description: |
+      Describes how often timestamp data is pushed into the FIFO.
+      Default is OFF.
+
+      - 0 # OFF
+      - 1 # Every message (decimation of 1)
+      - 2 # Every 8 messages (decimation of 8)
+      - 3 # Every 32 messages (decimation of 32)
+    enum: [0, 1, 2, 3]
+
+  temperature-odr:
+    type: int
+    default: 0
+    description: |
+      The temperature batch data rate expressed in samples per second (Hz).
+      Default is OFF.
+
+      - 0 # OFF
+      - 1 # 1.875 Hz
+      - 2 # 15 Hz
+      - 3 # 60 Hz
+    enum: [0, 1, 2, 3]
+
+  fifo-mode:
+    type: int
+    default: 6
+    description: |
+      FIFO mode selection.
+      Default is continuous mode.
+
+      - 0 # FIFO OFF
+      - 1 # FIFO mode, stops collecting data when FIFO is full
+      - 2 # continuousWTM-to-full mode, continuous mode with FIFO watermark size, until trigger is deasserted, then data are stored in FIFO until the buffer is full
+      - 3 # continuous-to-FIFO mode, continuous mode until trigger is deasserted, then FIFO mode
+      - 4 # bypass-to-continuous mode, bypass mode until trigger is deasserted, then continuous mode
+      - 6 # continuous mode, if the FIFO is full, new sample overwrite old samples
+      - 7 # bypass-to-FIFO mode, bypass mode until trigger is deasserted, then FIFO mode
+    enum: [0, 1, 2, 3, 4, 6, 7]
